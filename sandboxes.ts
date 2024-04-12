@@ -1,28 +1,28 @@
-import { gql } from 'https://deno.land/x/graphql_request/mod.ts'
-import { fetchGraphQL } from '../sdk.ts'
+import { gql } from "https://deno.land/x/graphql_request/mod.ts";
+import { fetchGraphQL } from "./index.ts";
 
 interface Message {
-  id: string
-  createdAt: string
-  updatedAt: string
-  sandboxId: string
-  message: string
-  error?: string
-  response?: string
-  runId?: string
-  status?: string
-  statusUpdatedAt?: string
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  sandboxId: string;
+  message: string;
+  error?: string;
+  response?: string;
+  runId?: string;
+  status?: string;
+  statusUpdatedAt?: string;
 }
 
 interface Sandbox {
-  id: string
-  e2bId?: string
-  createdAt: string
-  updatedAt: string
-  workflowId?: string
-  chatId?: string
-  __typename: string
-  messages: Message[]
+  id: string;
+  e2bId?: string;
+  createdAt: string;
+  updatedAt: string;
+  workflowId?: string;
+  chatId?: string;
+  __typename: string;
+  messages: Message[];
   addMessage: (
     message: string,
     error?: string,
@@ -30,7 +30,7 @@ interface Sandbox {
     runId?: string,
     status?: string,
     statusUpdatedAt?: string
-  ) => Promise<any> // Adjust the function signature as needed.
+  ) => Promise<any>; // Adjust the function signature as needed.
 }
 
 const getAllSandboxes = gql`
@@ -56,7 +56,7 @@ const getAllSandboxes = gql`
       }
     }
   }
-`
+`;
 
 const getSandboxById = gql`
   query GetSandboxById($id: String!) {
@@ -81,7 +81,7 @@ const getSandboxById = gql`
       }
     }
   }
-`
+`;
 
 const createSandbox = gql`
   mutation CreateSandbox($input: CreateSandboxInput) {
@@ -105,7 +105,7 @@ const createSandbox = gql`
       }
     }
   }
-`
+`;
 
 // Updated mutation based on the new schema provided
 const createMessageMutation = gql`
@@ -126,7 +126,7 @@ const createMessageMutation = gql`
       statusUpdatedAt
     }
   }
-`
+`;
 
 // Utility function to enhance a sandbox with additional functionality
 function enhanceSandbox(sandbox: Sandbox): Sandbox {
@@ -146,29 +146,29 @@ function enhanceSandbox(sandbox: Sandbox): Sandbox {
       runId,
       status,
       statusUpdatedAt,
-    }
+    };
     // Call the createMessage mutation with the assembled input.
-    return fetchGraphQL(createMessageMutation, { input })
-  }
-  return sandbox
+    return fetchGraphQL(createMessageMutation, { input });
+  };
+  return sandbox;
 }
 
 const sandboxesSdk = {
   sandboxes: {
     all: () => fetchGraphQL(getAllSandboxes),
     get: async (id: string): Promise<Sandbox> => {
-      const response = await fetchGraphQL(getSandboxById, { id })
-      let sandbox: Sandbox = response.sandbox
-      sandbox = enhanceSandbox(sandbox)
-      return sandbox
+      const response = await fetchGraphQL(getSandboxById, { id });
+      let sandbox: Sandbox = response.sandbox;
+      sandbox = enhanceSandbox(sandbox);
+      return sandbox;
     },
     create: async (input?) => {
-      const response = await fetchGraphQL(createSandbox, { input })
-      let sandbox: Sandbox = response.createSandbox
-      sandbox = enhanceSandbox(sandbox)
-      return sandbox
+      const response = await fetchGraphQL(createSandbox, { input });
+      let sandbox: Sandbox = response.createSandbox;
+      sandbox = enhanceSandbox(sandbox);
+      return sandbox;
     },
   },
-}
+};
 
-export default sandboxesSdk
+export default sandboxesSdk;

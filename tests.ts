@@ -1,36 +1,31 @@
-Deno.env.set(
-  'HALLWAY_API_KEY',
-  '713f7cc064f7869b77d19e8d0981378ca7aeab1f6aa12607f509435d93956aee'
-)
-
-import Hallway from '../sdk.ts'
+import Hallway from "./index.ts";
 
 // NEW NEW unimplemented
 // const highlevel = await Hallway.app('highlevel')
 // const actions = await highlevel.actions()
 // const getPipelines = await highlevel.actionByName('getPipelines')
 
-const apps = await Hallway.apps.get()
-console.log(apps)
+const apps = await Hallway.apps.get();
+console.log(apps);
 
-const getContact = await Hallway.actions.getByName('highlevel', 'getContact')
-console.log(getContact)
+const getContact = await Hallway.actions.getByName("highlevel", "getContact");
+console.log(getContact);
 
-const accounts = await Hallway.accounts.getByName('highlevel')
-console.log(accounts)
+const accounts = await Hallway.accounts.getByName("highlevel");
+console.log(accounts);
 
-const account = accounts[0]
+const account = accounts[0];
 
-const contactId = '30v3YOnJ4JhOxXb8sK9Z'
+const contactId = "30v3YOnJ4JhOxXb8sK9Z";
 
 try {
   const val = await getContact.module.default({
     accessToken: account.accessToken,
     contactId,
-  })
-  console.log('retuuuunrn', val)
+  });
+  console.log("retuuuunrn", val);
 } catch (e) {
-  console.log('error', e)
+  console.log("error", e);
 }
 
 /*

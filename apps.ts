@@ -1,5 +1,5 @@
-import { gql } from 'https://deno.land/x/graphql_request/mod.ts'
-import { fetchGraphQL } from '../sdk.ts'
+import { gql } from "https://deno.land/x/graphql_request/mod.ts";
+import { fetchGraphQL } from "./index.ts";
 
 const getApps = gql`
   query AppsTableQuery {
@@ -22,7 +22,7 @@ const getApps = gql`
       __typename
     }
   }
-`
+`;
 
 const getAppByName = gql`
   query GetAppByName($name: String!) {
@@ -45,7 +45,7 @@ const getAppByName = gql`
       __typename
     }
   }
-`
+`;
 
 const appsSdk = {
   apps: {
@@ -53,6 +53,6 @@ const appsSdk = {
     getByName: (name: string) =>
       fetchGraphQL(getAppByName, { name }).then((response) => response.apps[0]),
   },
-}
+};
 
-export default appsSdk
+export default appsSdk;
