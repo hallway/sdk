@@ -1,5 +1,7 @@
 import { gql } from "https://deno.land/x/graphql_request/mod.ts";
 
+import { dynamicImport, importString } from "https://deno.land/x/import/mod.ts";
+
 import { fetchGraphQL } from "./index.ts";
 
 const getActions = gql`
@@ -54,16 +56,18 @@ const getActionByName = gql`
 `;
 
 const writeCodeToMemoryAndImport = async (action: any) => {
-  const initialUrl = `https://deno.land/x/hallway_sdk/actions/${action.app.name}/${action.name}.ts`;
+  // const initialUrl = `https://deno.land/x/hallway_sdk/actions/${action.app.name}/${action.name}.ts`;
 
-  // Fetch the URL to check for a redirect
-  const response = await fetch(initialUrl);
-  const finalUrl = response.url; // This will be the redirected URL if there was a redirect
+  // // Fetch the URL to check for a redirect
+  // const response = await fetch(initialUrl);
+  // const finalUrl = response.url; // This will be the redirected URL if there was a redirect
 
   console.log("Resolved URL for import:", finalUrl);
 
   // Dynamically import the module from the final URL
-  const module = await import(finalUrl);
+  //const module = await import(finalUrl);
+
+  const module = await importString(action.code);
 
   // Return the action object with the module
   return { ...action, module };
