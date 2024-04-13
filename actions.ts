@@ -62,7 +62,7 @@ const writeCodeToMemoryAndImport = async (action: any) => {
   // const response = await fetch(initialUrl);
   // const finalUrl = response.url; // This will be the redirected URL if there was a redirect
 
-  console.log("Resolved URL for import:", finalUrl);
+  //console.log("Resolved URL for import:", finalUrl);
 
   // Dynamically import the module from the final URL
   //const module = await import(finalUrl);
