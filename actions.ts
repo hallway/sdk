@@ -54,16 +54,16 @@ const getActionByName = gql`
 `;
 
 const writeCodeToMemoryAndImport = async (action: any) => {
-  //const tempDirPath = './temp'
-  //const tempFilePath = `${tempDirPath}/${action.id}.ts`
+  const initialUrl = `https://deno.land/x/hallway_sdk/actions/${action.app.name}/${action.name}.ts`;
 
-  // Create a blob from the action code
-  const url = `https://deno.land/x/hallway_sdk/actions/${action.app.name}/${action.name}.ts`;
-  console.log("url", url);
-  const module = await import(url);
+  // Fetch the URL to check for a redirect
+  const response = await fetch(initialUrl);
+  const finalUrl = response.url; // This will be the redirected URL if there was a redirect
 
-  // Revoke the blob URL to clean up
-  //URL.revokeObjectURL(codeBlobUrl)
+  console.log("Resolved URL for import:", finalUrl);
+
+  // Dynamically import the module from the final URL
+  const module = await import(finalUrl);
 
   // Return the action object with the module
   return { ...action, module };
