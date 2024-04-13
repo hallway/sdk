@@ -5,7 +5,7 @@ import {
 
 import { load } from "https://deno.land/std@0.222.1/dotenv/mod.ts";
 
-const env = await load();
+const dotenv = await load();
 
 import accountsSdk from "./accounts.ts";
 import actionsSdk from "./actions.ts";
@@ -21,7 +21,7 @@ export async function fetchGraphQL(
   variables?: Record<string, any>
 ) {
   // Retrieve the token from the environment variable
-  const key = env.HALLWAY_API_KEY;
+  const key = Deno.env.get("HALLWAY_API_KEY") || dotenv.HALLWAY_API_KEY;
   console.log(key);
 
   const client = new GraphQLClient(graphqlEndpoint, {
