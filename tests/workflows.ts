@@ -9,9 +9,10 @@ import Hallway from "../index.ts";
 
 
 
-const workflow = await Hallway.workflows.getById("2ed3cacf-ed57-4679-bb4b-780133044d26");
-console.log(workflow);
+const w = await H.workflows.getById("2ed3cacf-ed57-4679-bb4b-780133044d26");
+console.log(w);
 
+console.log(await w.run({input: 'YES'}));
 
 /*
 let sandbox = await Hallway.sandboxes.create()

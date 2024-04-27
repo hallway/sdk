@@ -27,8 +27,8 @@ const getWorkflowById = gql`
 `
 
 const runWorkflow = gql`
-  mutation RunWorkflow($id: String!) {
-    run(id: $id) @requireAuth
+  mutation RunWorkflow($id: String!, $input: JSON) {
+    runWorkflow(id: $id, input: $input)
   }
 `
 
@@ -39,7 +39,10 @@ const workflowsSdk = {
           const workflow = response.workflow;
           return {
             ...workflow,
-            run: () => fetchGraphQL(runWorkflow, { id }).then(runResponse => runResponse.data)
+            run: (input) => { 
+                console.log('input', input)
+                return fetchGraphQL(runWorkflow, { id, input }).then(runResponse => runResponse.runWorkflow)
+            }
           };
         }),
   },
