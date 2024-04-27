@@ -1,32 +1,17 @@
-import Hallway from "./index.ts";
+import Hallway from "../index.ts";
 
 // NEW NEW unimplemented
 // const highlevel = await Hallway.app('highlevel')
 // const actions = await highlevel.actions()
 // const getPipelines = await highlevel.actionByName('getPipelines')
 
-const apps = await Hallway.apps.get();
-console.log(apps);
 
-const getContact = await Hallway.actions.getByName("highlevel", "getContact");
-console.log(getContact);
 
-const accounts = await Hallway.accounts.getByName("highlevel");
-console.log(accounts);
 
-const account = accounts[0];
 
-const contactId = "30v3YOnJ4JhOxXb8sK9Z";
+const workflow = await Hallway.workflows.getById("2ed3cacf-ed57-4679-bb4b-780133044d26");
+console.log(workflow);
 
-try {
-  const val = await getContact.module.default({
-    accessToken: account.accessToken,
-    contactId,
-  });
-  console.log("retuuuunrn", val);
-} catch (e) {
-  console.log("error", e);
-}
 
 /*
 let sandbox = await Hallway.sandboxes.create()

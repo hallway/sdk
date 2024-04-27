@@ -3,14 +3,15 @@ import {
   GraphQLClient,
 } from "https://deno.land/x/graphql_request/mod.ts";
 
-import { load } from "https://deno.land/std@0.222.1/dotenv/mod.ts";
+import { load } from "https://deno.land/std@0.223.0/dotenv/mod.ts";
 
 const dotenv = await load();
 
 import accountsSdk from "./accounts.ts";
-import actionsSdk from "./actions.ts";
+//import actionsSdk from "./actions.ts";
 import appsSdk from "./apps.ts";
 import sandboxesSdk from "./sandboxes.ts";
+import workflowsSdk from "./workflows.ts";
 
 export const graphqlEndpoint =
   Deno.env.get("GRAPHQL_ENDPOINT") || "https://hallway.ngrok.app/api/graphql";
@@ -39,10 +40,11 @@ export async function fetchGraphQL(
 
 // Combining both SDKs into a single object
 const sdk = {
-  actions: actionsSdk.actions,
+  //actions: actionsSdk.actions,
   apps: appsSdk.apps,
   accounts: accountsSdk.accounts,
   sandboxes: sandboxesSdk.sandboxes,
+  workflows: workflowsSdk.workflows,
 };
 
 export default sdk;

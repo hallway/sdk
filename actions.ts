@@ -1,6 +1,6 @@
-import { gql } from "https://deno.land/x/graphql_request/mod.ts";
+import { gql } from "https://deno.land/x/graphql_request@v4.1.0/mod.ts";
 
-import { dynamicImport, importString } from "https://deno.land/x/import/mod.ts";
+import { dynamicImport, importString } from "https://deno.land/x/import@0.2.1/mod.ts";
 
 import { fetchGraphQL } from "./index.ts";
 
