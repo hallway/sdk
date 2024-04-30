@@ -1,4 +1,4 @@
-import Hallway from "../index.ts";
+import H from "../index.ts";
 
 // NEW NEW unimplemented
 // const highlevel = await Hallway.app('highlevel')
@@ -9,10 +9,26 @@ import Hallway from "../index.ts";
 
 
 
-const w = await H.workflows.getById("2ed3cacf-ed57-4679-bb4b-780133044d26");
-console.log(w);
+const helloWorld = await H.workflows.getById("2ed3cacf-ed57-4679-bb4b-780133044d26");
 
-console.log(await w.run({input: 'YES'}));
+let out = await helloWorld.run({input: 'YES'})
+
+console.log(out);
+
+
+const addOne = await H.workflows.getById("1325f1c2-1c75-4736-8680-8dd6e8953996");
+
+let value = 1
+value = await addOne.run({value})
+value = await addOne.run({value})
+value = await addOne.run({value})
+value = await addOne.run({value})
+value = await addOne.run({value})
+value = await addOne.run({value})
+value = await addOne.run({value})
+
+
+console.log(value);
 
 /*
 let sandbox = await Hallway.sandboxes.create()
