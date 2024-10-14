@@ -14,7 +14,7 @@ import sandboxesSdk from "./sandboxes.ts";
 import workflowsSdk from "./workflows.ts";
 
 export const graphqlEndpoint =
-  Deno.env.get("GRAPHQL_ENDPOINT") || "https://hallway.ngrok.app/api/graphql";
+  Deno.env.get("GRAPHQL_ENDPOINT") || "https://hallway.com/api/graphql";
 
 // Abstract request method for querying GraphQL with authorization
 export async function fetchGraphQL(
