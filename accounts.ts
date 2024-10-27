@@ -13,6 +13,8 @@ const getAccounts = gql`
       accessToken
       expiresAt
       authorizationCode
+      apiKey
+      appKey
       isEnabled
       status
       createdAt
@@ -56,6 +58,8 @@ const getAccountsByName = gql`
       accessToken
       expiresAt
       authorizationCode
+      apiKey
+      appKey
       isEnabled
       status
       createdAt
